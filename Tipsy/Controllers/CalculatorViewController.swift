@@ -19,7 +19,7 @@ class CalculatorViewController: UIViewController {
   var tip = 0.1
   var numberOfPeople = 2
   var billTotal = 0.0
-  
+  var resultToTwoDecimalPlaces = "0.0"
   
   
   override func viewDidLoad() {
@@ -81,10 +81,27 @@ class CalculatorViewController: UIViewController {
       
       //Round the result to 2 decimal places and turn it into a String.
       
-      let resultToTwoDecimalPlaces = String(format: "%.2f", result)
-      print(resultToTwoDecimalPlaces)
+      resultToTwoDecimalPlaces = String(format: "%.2f", result)
       
     }
+    
+    performSegue(withIdentifier: "Calculation", sender: self)
+    
+  }
+  
+  //This method gets triggered just before the segue starts.
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //If the currently triggered segue is the "Calculation" segue.
+    if segue.identifier == "Calculation" {
+      //Get hold of the instance of the destination VC and type cast it to a ResultViewController.
+      let destinationVC = segue.destination as! ResultsViewController
+      
+      //Set the destination ResultsViewController's properties.
+      destinationVC.result = resultToTwoDecimalPlaces
+      destinationVC.tip = Int(tip * 100)
+      destinationVC.split = numberOfPeople
+    }
+    
   }
   
 }
