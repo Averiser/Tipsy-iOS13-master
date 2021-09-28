@@ -80,7 +80,6 @@ class CalculatorViewController: UIViewController {
       let result = billTotal * (1 + tip) / Double(numberOfPeople)
       
       //Round the result to 2 decimal places and turn it into a String.
-      
       resultToTwoDecimalPlaces = String(format: "%.2f", result)
       
     }
